@@ -1,0 +1,22 @@
+{
+  "name": "keksobooking",
+  "version": "25.0.0",
+  "private": true,
+  "type": "module",
+  "main": "public/js/main.js",
+  "description": "Личный проект «Кексобукинг» от HTML Academy",
+  "devDependencies": {
+    "browser-sync": "2.27.7",
+    "eslint": "8.7.0",
+    "eslint-config-htmlacademy": "5.0.0"
+  },
+  "scripts": {
+    "start": "browser-sync start --server \"public\" --no-ui --files \"public/js/**/*.js\"",
+    "lint": "eslint public/js/",
+    "test": "npm run lint"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  }
+}
