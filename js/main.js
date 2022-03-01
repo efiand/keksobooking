@@ -17,7 +17,7 @@ export const getRandomPositiveFloat = (a, b, digits = 1) => {
 };
 
 // Утилита общего назначения для получения случайного элемента массива
-const getRandomItem = (arr) => arr[getRandomPositiveInteger(0, arr.length - 1)];
+const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Утилита общего назначения для получения случайного фрагмента массива
 const getRandomArrayPart = (arr) => {
@@ -93,6 +93,6 @@ const generateOffer = (index) => {
   };
 };
 
-const generateOffers = (length) => Array.from({ length }).map((_el, i) => generateOffer(i + 1));
+const generateOffers = (length) => Array.from({ length }, (_el, i) => generateOffer(i + 1));
 
 generateOffers(OFFERS_COUNT);
