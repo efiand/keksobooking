@@ -1,4 +1,5 @@
 import {
+  OFFERS_COUNT,
   COORD_DECIMALS,
   CHECK_TIMES,
   FEATURES,
@@ -19,9 +20,12 @@ import {
   getNumberWithLeadZero
 } from './utils.js';
 
-const generateOffer = (index) => {
+const getRandomCheckIndex = () => getRandomPositiveInteger(0, CHECK_TIMES.length - 1);
+
+const createOfferData = (index) => {
   const lat = getRandomPositiveFloat(LatRange.MIN, LatRange.MAX, COORD_DECIMALS);
   const lng = getRandomPositiveFloat(LngRange.MIN, LngRange.MAX, COORD_DECIMALS);
+  const checks = [getRandomCheckIndex(), getRandomCheckIndex()];
 
   return {
     author: {
@@ -34,8 +38,8 @@ const generateOffer = (index) => {
       type: getRandomItem(Object.keys(offerTypes)),
       rooms: getRandomPositiveInteger(RoomsRange.MIN, RoomsRange.MAX),
       guests: getRandomPositiveInteger(GuestsRange.MIN, GuestsRange.MAX),
-      checkin: getRandomItem(CHECK_TIMES),
-      checkout: getRandomItem(CHECK_TIMES),
+      checkin: CHECK_TIMES[Math.min(...checks)],
+      checkout: CHECK_TIMES[Math.max(...checks)],
       features: getRandomArrayPart(FEATURES),
       description: `Описание бъявления ${index}`,
       photos: getRandomArrayPart(PHOTOS)
@@ -47,4 +51,4 @@ const generateOffer = (index) => {
   };
 };
 
-export const generateOffers = (length) => Array.from({ length }, (_el, i) => generateOffer(i + 1));
+export const createOffersData = (length = OFFERS_COUNT) => Array.from({ length }, (_el, i) => createOfferData(i + 1));
