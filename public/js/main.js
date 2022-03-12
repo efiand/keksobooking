@@ -1,4 +1,7 @@
-import { OFFERS_COUNT } from './data.js';
-import { generateOffers } from './offers.js';
+import { createOffersData } from './create-offers-data.js';
+import { createOfferTemplate } from './create-offer-template.js';
 
-console.log(generateOffers(OFFERS_COUNT)); // eslint-disable-line
+const [offer] = createOffersData();
+const offerTemplate = createOfferTemplate(offer);
+
+document.querySelector('#map-canvas').append(offerTemplate);

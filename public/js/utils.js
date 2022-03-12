@@ -1,4 +1,4 @@
-// Утилита общего назначения для получения случайного целого из диапазона
+// Получение случайного целого из диапазона
 export const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -7,7 +7,7 @@ export const getRandomPositiveInteger = (a, b) => {
   return Math.floor(result);
 };
 
-// Утилита общего назначения для получения случайного числа с заданной точностью из диапапзона
+// Получение случайного числа с заданной точностью из диапапзона
 export const getRandomPositiveFloat = (a, b, digits = 1) => {
   const lower = Math.min(Math.abs(a), Math.abs(b));
   const upper = Math.max(Math.abs(a), Math.abs(b));
@@ -16,10 +16,10 @@ export const getRandomPositiveFloat = (a, b, digits = 1) => {
   return parseFloat(result.toFixed(digits));
 };
 
-// Утилита общего назначения для получения случайного элемента массива
+// Получение случайного элемента массива
 export const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// Утилита общего назначения для получения случайного фрагмента массива
+// Получение случайного фрагмента массива
 export const getRandomArrayPart = (arr) => {
   const lastIndex = arr.length - 1;
   const a = getRandomPositiveInteger(0, lastIndex);
@@ -30,5 +30,20 @@ export const getRandomArrayPart = (arr) => {
   return arr.slice(lower, upper);
 };
 
-// Утилита общего назначения для вывода числа с ведущим нулём
+// Вывод числа с ведущим нулём
 export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : number;
+
+// Корректировка существительных после числительных
+export const declineNum = (num, nominative, genetiveSingular = nominative, genetivePlural = genetiveSingular) => {
+  let answer = genetivePlural;
+  const numLast = parseInt(num.toString().slice(-1), 10);
+  const numLastDecim = parseInt(num.toString().slice(-2, -1), 10);
+  if (numLastDecim !== 1) {
+    if (numLast === 1) {
+      answer = nominative;
+    } else if (numLast > 1 && numLast < 5) {
+      answer = genetiveSingular;
+    }
+  }
+  return `${num} ${answer}`;
+};
