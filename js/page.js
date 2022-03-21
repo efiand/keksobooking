@@ -1,11 +1,21 @@
-import { activateForm, deactivateForm } from './form.js';
+const mapFiltersElement = document.querySelector('.map__filters');
+const adFormElement = document.querySelector('.ad-form');
+const mapFiltersDisabledClassName = 'map__filters--disabled';
+const adFormDisabledClassName = 'ad-form--disabled';
 
-const FORM_CLASSNAMES = ['ad-form', 'map__filters'];
+const toggleForm = (activeFlag, formElement, disabledClassName) => {
+  const classMethod = activeFlag ? 'remove' : 'add';
+  formElement.classList[classMethod](disabledClassName);
 
-export const activatePage = () => {
-  FORM_CLASSNAMES.forEach(activateForm);
+  formElement.querySelectorAll('fieldset').forEach((fieldset) => {
+    fieldset.disabled = !activeFlag;
+  });
 };
 
-export const deactivatePage = () => {
-  FORM_CLASSNAMES.forEach(deactivateForm);
+const togglePage = (activeFlag) => () => {
+  toggleForm(activeFlag, mapFiltersElement, mapFiltersDisabledClassName);
+  toggleForm(activeFlag, adFormElement, adFormDisabledClassName);
 };
+
+export const activatePage = togglePage(true);
+export const deactivatePage = togglePage(false);

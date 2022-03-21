@@ -4,7 +4,10 @@ import { activatePage, deactivatePage } from './page.js';
 
 const [offer] = createOffersData();
 const offerTemplate = createOfferTemplate(offer);
-document.querySelector('#map-canvas').append(offerTemplate);
+const mapCanvas = document.querySelector('#map-canvas');
+
+mapCanvas.append(offerTemplate);
 
 deactivatePage();
-activatePage();
+
+mapCanvas.addEventListener('click', () => activatePage());
