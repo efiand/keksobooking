@@ -1,3 +1,5 @@
+import { initAdForm } from './ad-form.js';
+
 const mapFiltersElement = document.querySelector('.map__filters');
 const adFormElement = document.querySelector('.ad-form');
 const mapFiltersDisabledClassName = 'map__filters--disabled';
@@ -17,5 +19,8 @@ const togglePage = (activeFlag) => () => {
   toggleForm(activeFlag, adFormElement, adFormDisabledClassName);
 };
 
-export const activatePage = togglePage(true);
+export const activatePage = () => {
+  initAdForm(adFormElement);
+  togglePage(true)();
+};
 export const deactivatePage = togglePage(false);
