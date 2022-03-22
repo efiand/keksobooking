@@ -2,6 +2,22 @@ const PHOTO_DIR = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/
 
 export const OFFERS_COUNT = 10;
 export const COORD_DECIMALS = 5;
+export const CHECK_TIMES = ['12:00', '13:00', '14:00'];
+export const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
+export const PHOTOS = [
+  `${PHOTO_DIR}/duonguyen-8LrGtIxxa4w.jpg`,
+  `${PHOTO_DIR}/brandon-hoogenboom-SNxQGWxZQi0.jpg`,
+  `${PHOTO_DIR}/claire-rendall-b6kAwr1i0Iw.jpg`
+];
+
+export const roomToGuests = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0']
+};
+
 export const offerTypes = {
   palace: 'Дворец',
   flat: 'Квартика',
@@ -9,13 +25,7 @@ export const offerTypes = {
   bungalow: 'Бунгало',
   hotel: 'Отель '
 };
-export const CHECK_TIMES = ['12:00', '13:00', '14:00'];
-export const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-export const PHOTOS = [
-  `${PHOTO_DIR}/duonguyen-8LrGtIxxa4w.jpg`,
-  `${PHOTO_DIR}/brandon-hoogenboom-SNxQGWxZQi0.jpg`,
-  `${PHOTO_DIR}/claire-rendall-b6kAwr1i0Iw.jpg`
-];
+
 export const LatRange = {
   MIN: 35.65,
   MAX: 35.7

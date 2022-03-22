@@ -47,3 +47,5 @@ export const declineNum = (num, nominative, genetiveSingular = nominative, genet
   }
   return `${num} ${answer}`;
 };
+
+export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
