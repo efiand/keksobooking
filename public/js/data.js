@@ -2,6 +2,7 @@ const PHOTO_DIR = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/
 
 export const OFFERS_COUNT = 10;
 export const COORD_DECIMALS = 5;
+export const MAX_PRICE = 100000;
 export const CHECK_TIMES = ['12:00', '13:00', '14:00'];
 export const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
@@ -20,19 +21,24 @@ export const roomToGuests = {
 
 export const offerTypes = {
   palace: {
-    title: 'Дворец'
+    title: 'Дворец',
+    min: 10000
   },
   flat: {
-    title: 'Квартика'
+    title: 'Квартира',
+    min: 1000
   },
   house: {
-    title: 'Дом'
+    title: 'Дом',
+    min: 5000
   },
   bungalow: {
-    title: 'Бунгало'
+    title: 'Бунгало',
+    min: 0
   },
   hotel: {
-    title: 'Отель '
+    title: 'Отель ',
+    min: 3000
   },
 };
 
