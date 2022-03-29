@@ -34,18 +34,27 @@ export const getRandomArrayPart = (arr) => {
 export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : number;
 
 // Корректировка существительных после числительных
-export const declineNum = (num, nominative, genetiveSingular = nominative, genetivePlural = genetiveSingular) => {
-  let answer = genetivePlural;
+export const declineNum = (num, nominative, genitiveSingular = nominative, genitivePlural = genitiveSingular) => {
+  let answer = genitivePlural;
   const numLast = parseInt(num.toString().slice(-1), 10);
   const numLastDecim = parseInt(num.toString().slice(-2, -1), 10);
   if (numLastDecim !== 1) {
     if (numLast === 1) {
       answer = nominative;
     } else if (numLast > 1 && numLast < 5) {
-      answer = genetiveSingular;
+      answer = genitiveSingular;
     }
   }
   return `${num} ${answer}`;
 };
 
 export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
+
+export const toggleForm = (activeFlag, formElement, disabledClassName) => {
+  const classMethod = activeFlag ? 'remove' : 'add';
+  formElement.classList[classMethod](disabledClassName);
+
+  formElement.querySelectorAll('fieldset').forEach((fieldset) => {
+    fieldset.disabled = !activeFlag;
+  });
+};

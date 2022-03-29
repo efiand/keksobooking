@@ -1,13 +1,16 @@
-import { createOffersData } from './create-offers-data.js';
-import { createOfferTemplate } from './create-offer-template.js';
-import { activatePage, deactivatePage } from './page.js';
+import { toggleForm } from './utils.js';
+import { createOfferData, createOfferTemplate } from './offer.js';
+import { AD_DISABLED_CLASS_NAME, adFormElement } from './ad-form.js';
+import { FILTERS_DISABLED_CLASS_NAME, filtersElement } from './filters.js';
 
-const [offer] = createOffersData();
-const offerTemplate = createOfferTemplate(offer);
 const mapCanvas = document.querySelector('#map-canvas');
 
-mapCanvas.append(offerTemplate);
+const togglePage = (isPageActive) => {
+  toggleForm(isPageActive, filtersElement, FILTERS_DISABLED_CLASS_NAME);
+  toggleForm(isPageActive, adFormElement, AD_DISABLED_CLASS_NAME);
+};
 
-deactivatePage();
+mapCanvas.append(createOfferTemplate(createOfferData()));
 
-mapCanvas.addEventListener('click', () => activatePage());
+togglePage(false);
+mapCanvas.addEventListener('click', () => togglePage(true));

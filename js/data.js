@@ -19,29 +19,43 @@ export const roomToGuests = {
 };
 
 export const offerTypes = {
-  palace: 'Дворец',
-  flat: 'Квартика',
-  house: 'Дом',
-  bungalow: 'Бунгало',
-  hotel: 'Отель '
+  palace: {
+    title: 'Дворец'
+  },
+  flat: {
+    title: 'Квартика'
+  },
+  house: {
+    title: 'Дом'
+  },
+  bungalow: {
+    title: 'Бунгало'
+  },
+  hotel: {
+    title: 'Отель '
+  },
 };
 
 export const LatRange = {
   MIN: 35.65,
   MAX: 35.7
 };
+
 export const LngRange = {
   MIN: 139.7,
   MAX: 139.8
 };
+
 export const PriceRange = {
   MIN: 2000,
   MAX: 50000
 };
+
 export const RoomsRange = {
   MIN: 1,
   MAX: 10
 };
+
 export const GuestsRange = {
   MIN: 2,
   MAX: 20

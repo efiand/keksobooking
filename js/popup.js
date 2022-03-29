@@ -1,6 +1,6 @@
 import { isEscapeKeyPressed } from './utils.js';
 
-export const createPopup = (template) => {
+const createPopup = (template) => {
   const popup = template.cloneNode(true);
   document.body.append(popup);
 
@@ -19,3 +19,5 @@ export const createPopup = (template) => {
   popup.addEventListener('click', () => closePopup());
   document.addEventListener('keydown', keyCloseHandler);
 };
+
+export { createPopup };
