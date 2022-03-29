@@ -1,7 +1,29 @@
-import { offerTypes } from './data.js';
-import { declineNum } from './utils.js';
+import {
+  OFFERS_COUNT,
+  COORD_DECIMALS,
+  CHECK_TIMES,
+  FEATURES,
+  PHOTOS,
+  offerTypes,
+  LatRange,
+  LngRange,
+  PriceRange,
+  RoomsRange,
+  GuestsRange
+} from './data.js';
+
+import {
+  declineNum,
+  getRandomPositiveInteger,
+  getRandomPositiveFloat,
+  getRandomItem,
+  getRandomArrayPart,
+  getNumberWithLeadZero
+} from './utils.js';
 
 const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
+
+const getRandomCheckIndex = () => getRandomPositiveInteger(0, CHECK_TIMES.length - 1);
 
 const fillELement = (element, list, getChild) => {
   if (list.length > 0) {
@@ -14,7 +36,38 @@ const fillELement = (element, list, getChild) => {
   }
 };
 
-export const createOfferTemplate = ({ author = {}, offer = {} }) => {
+const createOfferData = (index = 1) => {
+  const lat = getRandomPositiveFloat(LatRange.MIN, LatRange.MAX, COORD_DECIMALS);
+  const lng = getRandomPositiveFloat(LngRange.MIN, LngRange.MAX, COORD_DECIMALS);
+  const checks = [getRandomCheckIndex(), getRandomCheckIndex()];
+
+  return {
+    author: {
+      avatar: `img/avatars/user${getNumberWithLeadZero(index)}.png`
+    },
+    offer: {
+      title: `Объявление ${index}`,
+      address: `${lat}, ${lng}`,
+      price: getRandomPositiveInteger(PriceRange.MIN, PriceRange.MAX),
+      type: getRandomItem(Object.keys(offerTypes)),
+      rooms: getRandomPositiveInteger(RoomsRange.MIN, RoomsRange.MAX),
+      guests: getRandomPositiveInteger(GuestsRange.MIN, GuestsRange.MAX),
+      checkin: CHECK_TIMES[Math.min(...checks)],
+      checkout: CHECK_TIMES[Math.max(...checks)],
+      features: getRandomArrayPart(FEATURES),
+      description: `Описание бъявления ${index}`,
+      photos: getRandomArrayPart(PHOTOS)
+    },
+    location: {
+      lat,
+      lng
+    }
+  };
+};
+
+const createOffersData = (length = OFFERS_COUNT) => Array.from({ length }, (_el, i) => createOfferData(i + 1));
+
+const createOfferTemplate = ({ author = {}, offer = {} }) => {
   const template = offerTemplate.cloneNode(true);
 
   const roomsText = declineNum(offer.rooms, 'комната', 'комнаты', 'комнат');
@@ -23,7 +76,7 @@ export const createOfferTemplate = ({ author = {}, offer = {} }) => {
     '.popup__title': offer.title,
     '.popup__text--address': offer.address,
     '.popup__text--price': `${offer.price} ₽/ночь`,
-    '.popup__type': offerTypes[offer.type],
+    '.popup__type': offerTypes[offer.type].title,
     '.popup__text--capacity': `${roomsText} для ${guestsText}`,
     '.popup__text--time': `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`,
     '.popup__description': offer.description
@@ -61,3 +114,5 @@ export const createOfferTemplate = ({ author = {}, offer = {} }) => {
 
   return template;
 };
+
+export { createOfferData, createOffersData, createOfferTemplate };

@@ -13,7 +13,8 @@
   "scripts": {
     "start": "browser-sync start --server \"public\" --no-ui --files \"public/js/**/*.js\"",
     "lint": "eslint public/js/",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "dev": "npm test && npm start"
   },
   "engines": {
     "node": "16.x",
