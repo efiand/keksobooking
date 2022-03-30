@@ -1,31 +1,32 @@
-import { DEFAULT_LOCATION } from './data.js';
+import { DEFAULT_LOCATION, COORD_DECIMALS } from './data.js';
 
 const ZOOM = 12;
+const PIN_SIZE = 52;
+const MAIN_PIN_SIZE = 52;
+const PIN_RATIO = 0.5;
 const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const LAYER_COPY = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-const MAIN_PIN = {
-  iconUrl: './img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
-};
-const PIN = {
-  iconUrl: './img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-};
 
 const map = L.map('map-canvas');
 
-const mainPinMarker = L.marker(DEFAULT_LOCATION, {
-  draggable: true,
-  icon: L.icon(MAIN_PIN),
+const setPin = (size, filename) => L.icon({
+  iconUrl: `./img/${filename}.svg`,
+  iconSize: [size, size],
+  iconAnchor: [size * PIN_RATIO, size],
 });
 
-const getLocationString = ({ lat, lng }) => `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+const mainPinMarker = L.marker(DEFAULT_LOCATION, {
+  draggable: true,
+  icon: setPin(MAIN_PIN_SIZE, 'main-pin'),
+});
+
+const getLocationString = ({ lat, lng }) => `${lat.toFixed(COORD_DECIMALS)}, ${lng.toFixed(COORD_DECIMALS)}`;
 
 const createMarker = (createTemplate) => (item) => {
   L
-    .marker(item.location, { icon: L.icon(PIN) })
+    .marker(item.location, {
+      icon: setPin(PIN_SIZE, 'pin')
+    })
     .addTo(map)
     .bindPopup(createTemplate(item));
 };

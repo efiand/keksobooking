@@ -1,3 +1,6 @@
+const DECLINE_THRESHOLD = 5;
+const DECLINE_TAILSTART = -2;
+
 // Получение случайного целого из диапазона
 export const getRandomPositiveInteger = (a, b) => {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -37,11 +40,11 @@ export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : nu
 export const declineNum = (num, nominative, genitiveSingular = nominative, genitivePlural = genitiveSingular) => {
   let answer = genitivePlural;
   const numLast = parseInt(num.toString().slice(-1), 10);
-  const numLastDecim = parseInt(num.toString().slice(-2, -1), 10);
+  const numLastDecim = parseInt(num.toString().slice(DECLINE_TAILSTART, -1), 10);
   if (numLastDecim !== 1) {
     if (numLast === 1) {
       answer = nominative;
-    } else if (numLast > 1 && numLast < 5) {
+    } else if (numLast > 1 && numLast < DECLINE_THRESHOLD) {
       answer = genitiveSingular;
     }
   }
