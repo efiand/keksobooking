@@ -41,6 +41,7 @@ const setPriceAttributes = () => {
   priceFieldElement.min = minPrice;
   priceFieldElement.placeholder = minPrice;
 };
+setPriceAttributes();
 
 const timesChangeHandler = (evt) => {
   const { value } = evt.currentTarget;
@@ -95,8 +96,6 @@ adFormElement.addEventListener('submit', (evt) => {
 
 pristine.addValidator(priceFieldElement, validatePrice, getPriceMessage, PRICE_VALIDATION_PRIORITY, true);
 pristine.addValidator(capacityFieldElement, validateCapacity, getCapacityMessage);
-
-setPriceAttributes();
 
 addMapHandlers(addressElement, resetElement);
 

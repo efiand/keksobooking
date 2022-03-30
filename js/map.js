@@ -41,8 +41,8 @@ const addMapHandlers = (addressElement, resetElement) => {
   });
 };
 
-const initMap = (data, createTemplate, loadHandler) => {
-  data.forEach(createMarker(createTemplate));
+const initMap = (data, createPopup, loadHandler) => {
+  data.forEach(createMarker(createPopup));
 
   map.on('load', loadHandler).setView(DEFAULT_LOCATION, ZOOM);
 };
