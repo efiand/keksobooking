@@ -6,6 +6,11 @@ export const MAX_PRICE = 100000;
 export const CHECK_TIMES = ['12:00', '13:00', '14:00'];
 export const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
+export const DEFAULT_LOCATION = {
+  lat: 35.6894,
+  lng: 139.69235,
+};
+
 export const PHOTOS = [
   `${PHOTO_DIR}/duonguyen-8LrGtIxxa4w.jpg`,
   `${PHOTO_DIR}/brandon-hoogenboom-SNxQGWxZQi0.jpg`,

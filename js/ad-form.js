@@ -1,18 +1,23 @@
 import { MAX_PRICE, offerTypes, roomToGuests } from './data.js';
 import { declineNum } from './utils.js';
 import { createPopup } from './popup.js';
+import { addMapHandlers } from './map.js';
+import { createUISlider } from './slider.js';
 
 const GROUP_CLASS_NAME = 'ad-form__element';
 const AD_DISABLED_CLASS_NAME = 'ad-form--disabled';
 const PRICE_VALIDATION_PRIORITY = 1000;
 
 const adFormElement = document.querySelector('.ad-form');
+const addressElement = adFormElement.querySelector('#address');
 const typeFieldElement = adFormElement.querySelector('[name="type"]');
 const priceFieldElement = adFormElement.querySelector('[name="price"]');
+const priceSliderElement = adFormElement.querySelector('.ad-form__slider');
 const roomsFieldElement = adFormElement.querySelector('[name="rooms"]');
 const capacityFieldElement = adFormElement.querySelector('[name="capacity"]');
 const timeinFieldElement = adFormElement.querySelector('[name="timein"]');
 const timeoutFieldElement = adFormElement.querySelector('[name="timeout"]');
+const resetElement = adFormElement.querySelector('.ad-form__reset');
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -43,18 +48,32 @@ const timesChangeHandler = (evt) => {
   timeoutFieldElement.value = value;
 };
 
+const priceUISlider = createUISlider(priceSliderElement, priceFieldElement);
+
 const pristine = new Pristine(adFormElement, {
   classTo: GROUP_CLASS_NAME,
   errorTextParent: GROUP_CLASS_NAME
 });
-pristine.addValidator(priceFieldElement, validatePrice, getPriceMessage, PRICE_VALIDATION_PRIORITY, true);
-pristine.addValidator(capacityFieldElement, validateCapacity, getCapacityMessage);
-
-setPriceAttributes();
 
 typeFieldElement.addEventListener('change', () => {
   setPriceAttributes();
-  pristine.validate(priceFieldElement);
+
+  priceUISlider.updateOptions({
+    range: {
+      min: parseInt(priceFieldElement.min, 10),
+      max: MAX_PRICE,
+    },
+  });
+});
+
+priceFieldElement.addEventListener('input', () => {
+  if (pristine.validate(priceFieldElement)) {
+    priceUISlider.set(parseInt(priceFieldElement.value, 10));
+  }
+});
+
+priceUISlider.on('slide', () => {
+  priceFieldElement.value = priceUISlider.get();
 });
 
 roomsFieldElement.addEventListener('change', () => pristine.validate(capacityFieldElement));
@@ -70,5 +89,12 @@ adFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   createPopup(errorTemplate);
 });
+
+pristine.addValidator(priceFieldElement, validatePrice, getPriceMessage, PRICE_VALIDATION_PRIORITY, true);
+pristine.addValidator(capacityFieldElement, validateCapacity, getCapacityMessage);
+
+setPriceAttributes();
+
+addMapHandlers(addressElement, resetElement);
 
 export { AD_DISABLED_CLASS_NAME, adFormElement };

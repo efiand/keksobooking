@@ -1,5 +1,4 @@
 import {
-  OFFERS_COUNT,
   COORD_DECIMALS,
   CHECK_TIMES,
   FEATURES,
@@ -65,7 +64,7 @@ const createOfferData = (index = 1) => {
   };
 };
 
-const createOffersData = (length = OFFERS_COUNT) => Array.from({ length }, (_el, i) => createOfferData(i + 1));
+const createOffersData = (length) => Array.from({ length }, (_el, i) => createOfferData(i + 1));
 
 const createOfferTemplate = ({ author = {}, offer = {} }) => {
   const template = offerTemplate.cloneNode(true);
@@ -115,4 +114,4 @@ const createOfferTemplate = ({ author = {}, offer = {} }) => {
   return template;
 };
 
-export { createOfferData, createOffersData, createOfferTemplate };
+export { createOffersData, createOfferTemplate };
