@@ -16,3 +16,13 @@ globals:
 
 extends:
   "htmlacademy/vanilla"
+
+rules:
+  no-magic-numbers:
+    - error
+    -
+      ignore:
+        - -1
+        - 0
+        - 1
+        - 10
