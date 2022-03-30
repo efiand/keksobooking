@@ -65,6 +65,9 @@ typeFieldElement.addEventListener('change', () => {
       max: MAX_PRICE,
     },
   });
+
+  // Чтобы при смене типа сразу подсветило, если значение стало невалидным
+  pristine.validate(priceFieldElement);
 });
 
 priceFieldElement.addEventListener('input', () => {
