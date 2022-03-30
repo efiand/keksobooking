@@ -74,6 +74,9 @@ priceFieldElement.addEventListener('input', () => {
 
 priceUISlider.on('slide', () => {
   priceFieldElement.value = priceUISlider.get();
+
+  // Сброс сообщения, если значение стало валидным после установки в поле
+  pristine.validate(priceFieldElement);
 });
 
 roomsFieldElement.addEventListener('change', () => pristine.validate(capacityFieldElement));
