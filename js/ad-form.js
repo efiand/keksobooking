@@ -60,6 +60,8 @@ const changeType = (type = typeFieldElement.value) => {
   });
 };
 
+const resetMapHandler = addMapHandlers(addressElement);
+
 const pristine = new Pristine(adFormElement, {
   classTo: GROUP_CLASS_NAME,
   errorTextParent: GROUP_CLASS_NAME
@@ -101,13 +103,12 @@ adFormElement.addEventListener('submit', (evt) => {
 });
 
 adFormElement.addEventListener('reset', () => {
+  resetMapHandler();
   changeType(initialType);
   priceUISlider.set(parseInt(priceFieldElement.min, 10));
 });
 
 pristine.addValidator(priceFieldElement, validatePrice, getPriceMessage, PRICE_VALIDATION_PRIORITY, true);
 pristine.addValidator(capacityFieldElement, validateCapacity, getCapacityMessage);
-
-addMapHandlers(adFormElement, addressElement);
 
 export { AD_DISABLED_CLASS_NAME, adFormElement };

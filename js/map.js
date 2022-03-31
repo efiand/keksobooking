@@ -31,15 +31,15 @@ const createMarker = (createTemplate) => (item) => {
     .bindPopup(createTemplate(item));
 };
 
-const addMapHandlers = (adFormElement, addressElement) => {
+const addMapHandlers = (addressElement) => {
   mainPinMarker.on('moveend', (evt) => {
     addressElement.value = getLocationString(evt.target.getLatLng());
   });
 
-  adFormElement.addEventListener('reset', () => {
+  return () => {
     mainPinMarker.setLatLng(DEFAULT_LOCATION);
     map.closePopup().setView(DEFAULT_LOCATION, ZOOM);
-  });
+  };
 };
 
 const initMap = (data, createBaloon, loadHandler) => {
