@@ -17,7 +17,6 @@ import {
   getRandomArrayPart,
   getNumberWithLeadZero
 } from './utils.js';
-import { createPopup } from './popup.js';
 
 const TEST_COUNT = 10;
 const getRandomCheckIndex = () => getRandomPositiveInteger(0, CHECK_TIMES.length - 1);
@@ -51,18 +50,9 @@ const createOfferData = (index = 1) => {
   };
 };
 
-const createMockData = (length = TEST_COUNT) => Array.from({ length }, (_el, i) => createOfferData(i + 1));
+const createMocks = (handle) => Promise.resolve(Array.from({
+  length: TEST_COUNT,
+}, (_el, i) => createOfferData(i + 1)))
+  .then(handle);
 
-const fetchData = () => fetch('https://25.javascript.pages.academy/keksobooking/data')
-  .then((res) => res.json())
-  .catch(() => {
-    createPopup(false, (popupElement) => {
-      popupElement.querySelector('.error__message').textContent = 'Ошибка получения объявлений';
-      popupElement.querySelector('.error__button').textContent = 'Добавить объявление';
-    });
-    return [];
-  });
-
-const getOffersData = () => window.location.search.includes('test') ? Promise.resolve(createMockData()) : fetchData();
-
-export { getOffersData };
+export { createMocks };

@@ -3,12 +3,20 @@ import { isEscapeKeyPressed } from './utils.js';
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
-const createPopup = (isSuccess = true, modifyPopup = null) => {
-  const template = isSuccess ? successTemplate : errorTemplate;
-  const popupElement = template.cloneNode(true);
+const createPopup = ({ ok = true, message = null, buttonText = null } = {}) => {
+  const popupElement = (ok ? successTemplate : errorTemplate).cloneNode(true);
 
-  if (typeof modifyPopup === 'function') {
-    modifyPopup(popupElement);
+  if (!ok) {
+    const errorMessageElement = popupElement.querySelector('.error__message');
+    const errorButtonElement = popupElement.querySelector('.error__button');
+
+    if (message) {
+      errorMessageElement.textContent = message;
+    }
+
+    if (buttonText) {
+      errorButtonElement.textContent = buttonText;
+    }
   }
 
   document.body.append(popupElement);

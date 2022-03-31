@@ -1,6 +1,6 @@
 import { MAX_PRICE, offerTypes, roomToGuests } from './data.js';
 import { declineNum } from './utils.js';
-import { createPopup } from './popup.js';
+import { postData } from './api.js';
 import { addMapHandlers } from './map.js';
 import { createUISlider } from './slider.js';
 
@@ -97,19 +97,7 @@ adFormElement.addEventListener('submit', (evt) => {
     return;
   }
 
-  const body = new FormData(adFormElement);
-
-  fetch(adFormElement.action, {
-    method: 'POST',
-    body
-  })
-    .then(({ ok }) => {
-      createPopup(ok);
-
-      if (ok) {
-        adFormElement.reset();
-      }
-    });
+  postData(new FormData(adFormElement), () => adFormElement.reset());
 });
 
 adFormElement.addEventListener('reset', () => {

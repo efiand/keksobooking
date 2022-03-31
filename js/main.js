@@ -1,5 +1,6 @@
 import { toggleForm } from './utils.js';
-import { getOffersData } from './offer.js';
+import { getData } from './api.js';
+import { createMocks } from './mocks.js';
 import { createCard } from './card.js';
 import { initMap } from './map.js';
 import { AD_DISABLED_CLASS_NAME, adFormElement } from './ad-form.js';
@@ -10,7 +11,8 @@ const togglePage = (isPageActive) => {
   toggleForm(isPageActive, adFormElement, AD_DISABLED_CLASS_NAME);
 };
 
+const getOffers = window.location.search.includes('test') ? createMocks : getData;
+
 togglePage(false);
 
-getOffersData()
-  .then((data) => initMap(data, createCard, () => togglePage(true)));
+getOffers((data) => initMap(data, createCard, () => togglePage(true)));
