@@ -6,16 +6,15 @@ const successTemplate = document.querySelector('#success').content.querySelector
 const createPopup = (isSuccess = true, modifyPopup = null) => {
   const template = isSuccess ? successTemplate : errorTemplate;
   const popup = template.cloneNode(true);
-  let handleRemove = () => popup.remove();
 
   if (typeof modifyPopup === 'function') {
-    handleRemove = modifyPopup(popup);
+    modifyPopup(popup);
   }
 
   document.body.append(popup);
 
   const closePopup = () => {
-    handleRemove();
+    popup.remove();
     document.removeEventListener('keydown', keyCloseHandler);
   };
 

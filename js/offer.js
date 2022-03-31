@@ -57,10 +57,8 @@ const fetchData = () => fetch('https://25.javascript.pages.academy/keksobooking/
   .then((res) => res.json())
   .catch(() => {
     createPopup(false, (popup) => {
-      const messageElement = popup.querySelector('.error__message');
-      messageElement.textContent = 'Ошибка получения объявлений';
-
-      return () => window.location.reload();
+      popup.querySelector('.error__message').textContent = 'Ошибка получения объявлений';
+      popup.querySelector('.error__button').textContent = 'Добавить объявление';
     });
     return [];
   });

@@ -13,9 +13,4 @@ const togglePage = (isPageActive) => {
 togglePage(false);
 
 getOffersData()
-  .then((data) => {
-    if (data.length) {
-      initMap(data, createCard, () => togglePage(true));
-    }
-  });
-
+  .then((data) => initMap(data, createCard, () => togglePage(true)));
