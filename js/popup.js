@@ -5,16 +5,16 @@ const successTemplate = document.querySelector('#success').content.querySelector
 
 const createPopup = (isSuccess = true, modifyPopup = null) => {
   const template = isSuccess ? successTemplate : errorTemplate;
-  const popup = template.cloneNode(true);
+  const popupElement = template.cloneNode(true);
 
   if (typeof modifyPopup === 'function') {
-    modifyPopup(popup);
+    modifyPopup(popupElement);
   }
 
-  document.body.append(popup);
+  document.body.append(popupElement);
 
   const closePopup = () => {
-    popup.remove();
+    popupElement.remove();
     document.removeEventListener('keydown', keyCloseHandler);
   };
 
@@ -25,7 +25,7 @@ const createPopup = (isSuccess = true, modifyPopup = null) => {
     }
   }
 
-  popup.addEventListener('click', () => closePopup());
+  popupElement.addEventListener('click', () => closePopup());
   document.addEventListener('keydown', keyCloseHandler);
 };
 

@@ -56,9 +56,9 @@ const createMockData = (length = TEST_COUNT) => Array.from({ length }, (_el, i) 
 const fetchData = () => fetch('https://25.javascript.pages.academy/keksobooking/data')
   .then((res) => res.json())
   .catch(() => {
-    createPopup(false, (popup) => {
-      popup.querySelector('.error__message').textContent = 'Ошибка получения объявлений';
-      popup.querySelector('.error__button').textContent = 'Добавить объявление';
+    createPopup(false, (popupElement) => {
+      popupElement.querySelector('.error__message').textContent = 'Ошибка получения объявлений';
+      popupElement.querySelector('.error__button').textContent = 'Добавить объявление';
     });
     return [];
   });
