@@ -47,7 +47,19 @@ const timesChangeHandler = (evt) => {
   timeoutFieldElement.value = value;
 };
 
-const priceUISlider = createUISlider(priceSliderElement, priceFieldElement);
+const resetMapHandler = addMapHandlers(addressElement);
+
+const pristine = new Pristine(adFormElement, {
+  classTo: GROUP_CLASS_NAME,
+  errorTextParent: GROUP_CLASS_NAME
+});
+
+const priceUISlider = createUISlider(priceSliderElement, parseInt(priceFieldElement.min, 10), () => {
+  priceFieldElement.value = priceUISlider.get();
+
+  // Сброс сообщения, если значение стало валидным после установки в поле
+  pristine.validate(priceFieldElement);
+});
 
 const changeType = (type = typeFieldElement.value) => {
   setPriceAttributes(type);
@@ -60,13 +72,6 @@ const changeType = (type = typeFieldElement.value) => {
   });
 };
 
-const resetMapHandler = addMapHandlers(addressElement);
-
-const pristine = new Pristine(adFormElement, {
-  classTo: GROUP_CLASS_NAME,
-  errorTextParent: GROUP_CLASS_NAME
-});
-
 typeFieldElement.addEventListener('change', () => {
   changeType();
 
@@ -78,13 +83,6 @@ priceFieldElement.addEventListener('input', () => {
   if (pristine.validate(priceFieldElement)) {
     priceUISlider.set(parseInt(priceFieldElement.value, 10));
   }
-});
-
-priceUISlider.on('slide', () => {
-  priceFieldElement.value = priceUISlider.get();
-
-  // Сброс сообщения, если значение стало валидным после установки в поле
-  pristine.validate(priceFieldElement);
 });
 
 roomsFieldElement.addEventListener('change', () => pristine.validate(capacityFieldElement));
