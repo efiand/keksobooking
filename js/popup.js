@@ -1,11 +1,21 @@
 import { isEscapeKeyPressed } from './utils.js';
 
-const createPopup = (template) => {
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+
+const createPopup = (isSuccess = true, modifyPopup = null) => {
+  const template = isSuccess ? successTemplate : errorTemplate;
   const popup = template.cloneNode(true);
+  let handleRemove = () => popup.remove();
+
+  if (typeof modifyPopup === 'function') {
+    handleRemove = modifyPopup(popup);
+  }
+
   document.body.append(popup);
 
   const closePopup = () => {
-    popup.remove();
+    handleRemove();
     document.removeEventListener('keydown', keyCloseHandler);
   };
 

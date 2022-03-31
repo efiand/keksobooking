@@ -1,6 +1,5 @@
 const PHOTO_DIR = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking';
 
-export const OFFERS_COUNT = 10;
 export const COORD_DECIMALS = 5;
 export const MAX_PRICE = 100000;
 export const CHECK_TIMES = ['12:00', '13:00', '14:00'];

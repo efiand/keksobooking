@@ -3,7 +3,7 @@ import { declineNum } from './utils.js';
 
 const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const fillELement = (element, list, getChild) => {
+const fillELement = (element, list = [], getChild) => {
   if (list.length > 0) {
     element.innerHTML = '';
     list.forEach((item) => {

@@ -31,19 +31,19 @@ const createMarker = (createTemplate) => (item) => {
     .bindPopup(createTemplate(item));
 };
 
-const addMapHandlers = (addressElement, resetElement) => {
+const addMapHandlers = (adFormElement, addressElement) => {
   mainPinMarker.on('moveend', (evt) => {
     addressElement.value = getLocationString(evt.target.getLatLng());
   });
 
-  resetElement.addEventListener('click', () => {
+  adFormElement.addEventListener('reset', () => {
     mainPinMarker.setLatLng(DEFAULT_LOCATION);
-    map.setView(DEFAULT_LOCATION, ZOOM);
+    map.closePopup().setView(DEFAULT_LOCATION, ZOOM);
   });
 };
 
-const initMap = (data, createPopup, loadHandler) => {
-  data.forEach(createMarker(createPopup));
+const initMap = (data, createBaloon, loadHandler) => {
+  data.forEach(createMarker(createBaloon));
 
   map.on('load', loadHandler).setView(DEFAULT_LOCATION, ZOOM);
 };
