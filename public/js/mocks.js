@@ -10,7 +10,6 @@ import {
   RoomsRange,
   GuestsRange
 } from './data.js';
-
 import {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
@@ -19,6 +18,7 @@ import {
   getNumberWithLeadZero
 } from './utils.js';
 
+const TEST_COUNT = 10;
 const getRandomCheckIndex = () => getRandomPositiveInteger(0, CHECK_TIMES.length - 1);
 
 const createOfferData = (index = 1) => {
@@ -50,6 +50,9 @@ const createOfferData = (index = 1) => {
   };
 };
 
-const createOffersData = (length) => Array.from({ length }, (_el, i) => createOfferData(i + 1));
+const createMocks = (handle) => Promise.resolve(Array.from({
+  length: TEST_COUNT,
+}, (_el, i) => createOfferData(i + 1)))
+  .then(handle);
 
-export { createOffersData };
+export { createMocks };
