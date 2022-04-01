@@ -28,9 +28,9 @@ const validatePrice = (value) => {
 const validateCapacity = () => roomToGuests[roomsFieldElement.value].includes(capacityFieldElement.value);
 
 const getCapacityMessage = () => {
-  const roos = declineNum(roomsFieldElement.value, 'комнаты', 'комнат');
+  const rooms = declineNum(roomsFieldElement.value, 'комнаты', 'комнат');
   const validGuests = roomToGuests[roomsFieldElement.value];
-  return `Для ${roos} допустимо гостей: ${validGuests.join(', ')}`;
+  return `Для ${rooms} допустимо гостей: ${validGuests.join(', ')}`;
 };
 const getPriceMessage = () => `Выберите число между ${priceFieldElement.min} и ${MAX_PRICE}`;
 
