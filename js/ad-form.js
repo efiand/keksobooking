@@ -41,12 +41,6 @@ const setPriceAttributes = (type) => {
 };
 setPriceAttributes(initialType);
 
-const timesChangeHandler = (evt) => {
-  const { value } = evt.currentTarget;
-  timeinFieldElement.value = value;
-  timeoutFieldElement.value = value;
-};
-
 const resetMapHandler = addMapHandlers(addressElement);
 
 const pristine = new Pristine(adFormElement, {
@@ -87,8 +81,12 @@ priceFieldElement.addEventListener('input', () => {
 
 roomsFieldElement.addEventListener('change', () => pristine.validate(capacityFieldElement));
 
-timeinFieldElement.addEventListener('change', timesChangeHandler);
-timeoutFieldElement.addEventListener('change', timesChangeHandler);
+timeinFieldElement.addEventListener('change', () => {
+  timeoutFieldElement.value = timeinFieldElement.value;
+});
+timeoutFieldElement.addEventListener('change', () => {
+  timeinFieldElement.value = timeoutFieldElement.value;
+});
 
 adFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
