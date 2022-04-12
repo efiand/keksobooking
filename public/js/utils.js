@@ -1,5 +1,5 @@
 const DECLINE_THRESHOLD = 5;
-const DECLINE_TAILSTART = -2;
+const DECLINE_TAIL_START = -2;
 
 // Получение случайного целого из диапазона
 export const getRandomPositiveInteger = (a, b) => {
@@ -38,17 +38,19 @@ export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : nu
 
 // Корректировка существительных после числительных
 export const declineNum = (num, nominative, genitiveSingular = nominative, genitivePlural = genitiveSingular) => {
-  let answer = genitivePlural;
-  const numLast = parseInt(num.toString().slice(-1), 10);
-  const numLastDecim = parseInt(num.toString().slice(DECLINE_TAILSTART, -1), 10);
-  if (numLastDecim !== 1) {
-    if (numLast === 1) {
-      answer = nominative;
-    } else if (numLast > 1 && numLast < DECLINE_THRESHOLD) {
-      answer = genitiveSingular;
-    }
+  if (parseInt(num.toString().slice(DECLINE_TAIL_START, -1), 10) === 1) {
+    return `${num} ${genitivePlural}`;
   }
-  return `${num} ${answer}`;
+
+  const numLast = parseInt(num.toString().slice(-1), 10);
+  if (numLast === 1) {
+    return `${num} ${nominative}`;
+  }
+  if (numLast > 1 && numLast < DECLINE_THRESHOLD) {
+    return `${num} ${genitiveSingular}`;
+  }
+
+  return `${num} ${genitivePlural}`;
 };
 
 export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';

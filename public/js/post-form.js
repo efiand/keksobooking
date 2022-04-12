@@ -1,22 +1,30 @@
-import { MAX_PRICE, offerTypes, roomToGuests } from './data.js';
-import { declineNum } from './utils.js';
+import { MAX_PRICE, offerType } from './const.js';
+import { declineNum, toggleForm } from './utils.js';
 import { postData } from './api.js';
 import { addMapHandlers } from './map.js';
 import { createUISlider } from './slider.js';
+import { togglePage } from './page.js';
 
 const GROUP_CLASS_NAME = 'ad-form__element';
 const AD_DISABLED_CLASS_NAME = 'ad-form--disabled';
 const PRICE_VALIDATION_PRIORITY = 1000;
 
-const adFormElement = document.querySelector('.ad-form');
-const addressElement = adFormElement.querySelector('#address');
-const typeFieldElement = adFormElement.querySelector('[name="type"]');
-const priceFieldElement = adFormElement.querySelector('[name="price"]');
-const priceSliderElement = adFormElement.querySelector('.ad-form__slider');
-const roomsFieldElement = adFormElement.querySelector('[name="rooms"]');
-const capacityFieldElement = adFormElement.querySelector('[name="capacity"]');
-const timeinFieldElement = adFormElement.querySelector('[name="timein"]');
-const timeoutFieldElement = adFormElement.querySelector('[name="timeout"]');
+const RoomToGuests = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
+
+const postFormElement = document.querySelector('.ad-form');
+const addressElement = postFormElement.querySelector('#address');
+const typeFieldElement = postFormElement.querySelector('[name="type"]');
+const priceFieldElement = postFormElement.querySelector('[name="price"]');
+const priceSliderElement = postFormElement.querySelector('.ad-form__slider');
+const roomsFieldElement = postFormElement.querySelector('[name="rooms"]');
+const capacityFieldElement = postFormElement.querySelector('[name="capacity"]');
+const timeinFieldElement = postFormElement.querySelector('[name="timein"]');
+const timeoutFieldElement = postFormElement.querySelector('[name="timeout"]');
 
 const initialType = typeFieldElement.value;
 
@@ -25,17 +33,17 @@ const validatePrice = (value) => {
   const inRange = price >= Number(priceFieldElement.min) && price <= MAX_PRICE;
   return /^\d+$/.test(value) && inRange;
 };
-const validateCapacity = () => roomToGuests[roomsFieldElement.value].includes(capacityFieldElement.value);
+const validateCapacity = () => RoomToGuests[roomsFieldElement.value].includes(capacityFieldElement.value);
 
 const getCapacityMessage = () => {
   const rooms = declineNum(roomsFieldElement.value, 'комнаты', 'комнат');
-  const validGuests = roomToGuests[roomsFieldElement.value];
+  const validGuests = RoomToGuests[roomsFieldElement.value];
   return `Для ${rooms} допустимо гостей: ${validGuests.join(', ')}`;
 };
 const getPriceMessage = () => `Выберите число между ${priceFieldElement.min} и ${MAX_PRICE}`;
 
 const setPriceAttributes = (type) => {
-  const minPrice = offerTypes[type].min;
+  const minPrice = offerType[type].min;
   priceFieldElement.min = minPrice;
   priceFieldElement.placeholder = minPrice;
 };
@@ -43,7 +51,7 @@ setPriceAttributes(initialType);
 
 const resetMapHandler = addMapHandlers(addressElement);
 
-const pristine = new Pristine(adFormElement, {
+const pristine = new Pristine(postFormElement, {
   classTo: GROUP_CLASS_NAME,
   errorTextParent: GROUP_CLASS_NAME
 });
@@ -65,6 +73,8 @@ const changeType = (type = typeFieldElement.value) => {
     },
   });
 };
+
+const togglePostForm = (isActive) => toggleForm(isActive, postFormElement, AD_DISABLED_CLASS_NAME);
 
 typeFieldElement.addEventListener('change', () => {
   changeType();
@@ -88,17 +98,21 @@ timeoutFieldElement.addEventListener('change', () => {
   timeinFieldElement.value = timeoutFieldElement.value;
 });
 
-adFormElement.addEventListener('submit', (evt) => {
+postFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   if (!pristine.validate()) {
     return;
   }
 
-  postData(new FormData(adFormElement), () => adFormElement.reset());
+  const offerData = new FormData(postFormElement);
+  togglePage(false);
+  postData(offerData, () => {
+    postFormElement.reset();
+  });
 });
 
-adFormElement.addEventListener('reset', () => {
+postFormElement.addEventListener('reset', () => {
   resetMapHandler();
   changeType(initialType);
   priceUISlider.set(parseInt(priceFieldElement.min, 10));
@@ -107,4 +121,4 @@ adFormElement.addEventListener('reset', () => {
 pristine.addValidator(priceFieldElement, validatePrice, getPriceMessage, PRICE_VALIDATION_PRIORITY, true);
 pristine.addValidator(capacityFieldElement, validateCapacity, getCapacityMessage);
 
-export { AD_DISABLED_CLASS_NAME, adFormElement };
+export { togglePostForm };

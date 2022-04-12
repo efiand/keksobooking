@@ -1,29 +1,24 @@
 import { isEscapeKeyPressed } from './utils.js';
+import { togglePage } from './page.js';
 
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const Template = {
+  SUCCESS_POST: document.querySelector('#success').content.querySelector('.success'),
+  ERROR_POST: document.querySelector('#error').content.querySelector('.error')
+};
+Template.ERROR_FETCH = Template.ERROR_POST.cloneNode(true);
+Template.ERROR_FETCH.querySelector('.error__message').textContent = 'Ошибка получения объявлений';
+Template.ERROR_FETCH.querySelector('.error__button').textContent = 'Добавить объявление';
 
-const createPopup = ({ ok = true, message = null, buttonText = null } = {}) => {
-  const popupElement = (ok ? successTemplate : errorTemplate).cloneNode(true);
+const createPopup = (mode) => {
+  const popupElement = Template[mode].cloneNode(true);
 
-  if (!ok) {
-    const errorMessageElement = popupElement.querySelector('.error__message');
-    const errorButtonElement = popupElement.querySelector('.error__button');
-
-    if (message) {
-      errorMessageElement.textContent = message;
-    }
-
-    if (buttonText) {
-      errorButtonElement.textContent = buttonText;
-    }
-  }
-
+  togglePage(false);
   document.body.append(popupElement);
 
   const closePopup = () => {
     popupElement.remove();
     document.removeEventListener('keydown', keyCloseHandler);
+    togglePage(true);
   };
 
   function keyCloseHandler(evt) {
