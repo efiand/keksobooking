@@ -18,6 +18,7 @@ const createPopup = (mode) => {
   const closePopup = () => {
     popupElement.remove();
     document.removeEventListener('keydown', keyCloseHandler);
+
     togglePage(true);
   };
 

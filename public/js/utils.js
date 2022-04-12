@@ -63,3 +63,11 @@ export const toggleForm = (activeFlag, formElement, disabledClassName) => {
     fieldset.disabled = !activeFlag;
   });
 };
+
+export const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
