@@ -13,11 +13,7 @@ const getData = (handleSuccess) => fetch(`${SERVER}/data`, {
       return res.json();
     }
 
-    createPopup({
-      ok,
-      message: 'Ошибка получения объявлений',
-      textContent: 'Добавить объявление',
-    });
+    createPopup('ERROR_FETCH');
     return [];
   })
   .then(handleSuccess);
@@ -27,7 +23,7 @@ const postData = (body, handleSuccess) => fetch(SERVER, {
   body,
 })
   .then(({ ok }) => {
-    createPopup({ ok });
+    createPopup(ok ? 'SUCCESS_POST' : 'ERROR_POST');
 
     if (ok) {
       handleSuccess();

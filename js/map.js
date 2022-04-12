@@ -1,4 +1,4 @@
-import { DEFAULT_LOCATION, COORD_DECIMALS } from './data.js';
+import { COORD_DECIMALS } from './const.js';
 
 const ZOOM = 12;
 const PIN_SIZE = 52;
@@ -6,6 +6,10 @@ const MAIN_PIN_SIZE = 52;
 const PIN_RATIO = 0.5;
 const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const LAYER_COPY = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const DEFAULT_LOCATION = {
+  lat: 35.684,
+  lng: 139.754,
+};
 
 const map = L.map('map-canvas');
 

@@ -1,4 +1,4 @@
-import { offerTypes } from './data.js';
+import { offerType } from './const.js';
 import { declineNum } from './utils.js';
 
 const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -23,7 +23,7 @@ const createCard = ({ author = {}, offer = {} }) => {
     '.popup__title': offer.title,
     '.popup__text--address': offer.address,
     '.popup__text--price': `${offer.price} ₽/ночь`,
-    '.popup__type': offerTypes[offer.type].title,
+    '.popup__type': offerType[offer.type].title,
     '.popup__text--capacity': `${roomsText} для ${guestsText}`,
     '.popup__text--time': `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`,
     '.popup__description': offer.description
