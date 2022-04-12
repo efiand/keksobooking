@@ -3,6 +3,7 @@ import { declineNum, toggleForm } from './utils.js';
 import { postData } from './api.js';
 import { addMapHandlers } from './map.js';
 import { createUISlider } from './slider.js';
+import { initImageControl } from './image-control.js';
 import { togglePage } from './page.js';
 
 const GROUP_CLASS_NAME = 'ad-form__element';
@@ -25,6 +26,13 @@ const roomsFieldElement = postFormElement.querySelector('[name="rooms"]');
 const capacityFieldElement = postFormElement.querySelector('[name="capacity"]');
 const timeinFieldElement = postFormElement.querySelector('[name="timein"]');
 const timeoutFieldElement = postFormElement.querySelector('[name="timeout"]');
+
+const avatarInputElement = postFormElement.querySelector('#avatar');
+const avatarPreviewElement = postFormElement.querySelector('.ad-form-header__preview');
+const offerImageInputElement = postFormElement.querySelector('#images');
+const offerImagePreviewElement = postFormElement.querySelector('.ad-form__photo');
+const clearAvatar = initImageControl(avatarInputElement, avatarPreviewElement);
+const clearOfferImage = initImageControl(offerImageInputElement, offerImagePreviewElement);
 
 const initialType = typeFieldElement.value;
 
@@ -113,6 +121,8 @@ postFormElement.addEventListener('submit', (evt) => {
 });
 
 postFormElement.addEventListener('reset', () => {
+  clearAvatar();
+  clearOfferImage();
   resetMapHandler();
   changeType(initialType);
   priceUISlider.set(parseInt(priceFieldElement.min, 10));
