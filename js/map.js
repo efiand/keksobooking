@@ -11,7 +11,10 @@ const DEFAULT_LOCATION = {
   lng: 139.754,
 };
 
+let isInitiated = false;
+
 const map = L.map('map-canvas');
+const markerGroup = L.layerGroup().addTo(map);
 
 const setPin = (size, filename) => L.icon({
   iconUrl: `./img/${filename}.svg`,
@@ -22,7 +25,7 @@ const setPin = (size, filename) => L.icon({
 const mainPinMarker = L.marker(DEFAULT_LOCATION, {
   draggable: true,
   icon: setPin(MAIN_PIN_SIZE, 'main-pin'),
-});
+}).addTo(map);
 
 const getLocationString = ({ lat, lng }) => `${lat.toFixed(COORD_DECIMALS)}, ${lng.toFixed(COORD_DECIMALS)}`;
 
@@ -31,7 +34,7 @@ const createMarker = (createTemplate) => (item) => {
     .marker(item.location, {
       icon: setPin(PIN_SIZE, 'pin')
     })
-    .addTo(map)
+    .addTo(markerGroup)
     .bindPopup(createTemplate(item));
 };
 
@@ -46,13 +49,19 @@ const addMapHandlers = (addressElement) => {
   };
 };
 
-const initMap = (data, createBaloon, loadHandler) => {
-  data.forEach(createMarker(createBaloon));
+const renderMap = (data, createBaloon, loadHandler) => {
+  if (isInitiated) {
+    markerGroup.clearLayers();
+    loadHandler();
+  } else {
+    isInitiated = true;
+    map.on('load', loadHandler);
+  }
 
-  map.on('load', loadHandler).setView(DEFAULT_LOCATION, ZOOM);
+  data.forEach(createMarker(createBaloon));
+  map.setView(DEFAULT_LOCATION, ZOOM);
 };
 
 L.tileLayer(LAYER_URL, { attribution: LAYER_COPY }).addTo(map);
-mainPinMarker.addTo(map);
 
-export { initMap, addMapHandlers };
+export { renderMap, addMapHandlers };

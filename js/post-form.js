@@ -1,6 +1,7 @@
 import { MAX_PRICE, offerType } from './const.js';
 import { declineNum, toggleForm } from './utils.js';
 import { postData } from './api.js';
+import { clearFilters } from './filters.js';
 import { addMapHandlers } from './map.js';
 import { createUISlider } from './slider.js';
 import { initImageControl } from './image-control.js';
@@ -123,6 +124,7 @@ postFormElement.addEventListener('submit', (evt) => {
 postFormElement.addEventListener('reset', () => {
   clearAvatar();
   clearOfferImage();
+  clearFilters();
   resetMapHandler();
   changeType(initialType);
   priceUISlider.set(parseInt(priceFieldElement.min, 10));
