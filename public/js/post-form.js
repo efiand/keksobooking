@@ -128,6 +128,7 @@ postFormElement.addEventListener('reset', () => {
   resetMapHandler();
   changeType(initialType);
   priceUISlider.set(parseInt(priceFieldElement.min, 10));
+  pristine.reset();
 });
 
 pristine.addValidator(priceFieldElement, validatePrice, getPriceMessage, PRICE_VALIDATION_PRIORITY, true);
