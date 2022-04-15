@@ -1,5 +1,4 @@
-const DECLINE_THRESHOLD = 5;
-const DECLINE_TAIL_START = -2;
+const PLURAL_THRESHOLD = 5;
 
 // Получение случайного целого из диапазона
 export const getRandomPositiveInteger = (a, b) => {
@@ -36,22 +35,25 @@ export const getRandomArrayPart = (arr) => {
 // Вывод числа с ведущим нулём
 export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : number;
 
-// Корректировка существительных после числительных
-export const declineNum = (num, nominative, genitiveSingular = nominative, genitivePlural = genitiveSingular) => {
-  if (parseInt(num.toString().slice(DECLINE_TAIL_START, -1), 10) === 1) {
-    return `${num} ${genitivePlural}`;
+// Выбор словоформы по значению числа
+export const getWordAfterNum = (num, wordForms) => {
+  const [nominative, genitiveSin = nominative, genitivePl = genitiveSin] = wordForms;
+
+  const unitsValue = num % 10;
+
+  if (num % 100 - unitsValue === 10 || unitsValue >= PLURAL_THRESHOLD) {
+    return genitivePl;
   }
 
-  const numLast = parseInt(num.toString().slice(-1), 10);
-  if (numLast === 1) {
-    return `${num} ${nominative}`;
-  }
-  if (numLast > 1 && numLast < DECLINE_THRESHOLD) {
-    return `${num} ${genitiveSingular}`;
+  if (unitsValue === 1) {
+    return nominative;
   }
 
-  return `${num} ${genitivePlural}`;
+  return genitiveSin;
 };
+
+// Вывод числа с подходящей словоформой
+export const getNumWithWord = (num, wordForms) => `${num} ${getWordAfterNum(num, wordForms)}`;
 
 export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
 
