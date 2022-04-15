@@ -1,5 +1,5 @@
 import { offerType } from './const.js';
-import { declineNum } from './utils.js';
+import { getNumWithWord } from './utils.js';
 
 const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -17,8 +17,8 @@ const fillELement = (element, list = [], getChild) => {
 const createCard = ({ author = {}, offer = {} }) => {
   const template = offerTemplate.cloneNode(true);
 
-  const roomsText = declineNum(offer.rooms, 'комната', 'комнаты', 'комнат');
-  const guestsText = declineNum(offer.guests, 'гостя', 'гостей');
+  const roomsText = getNumWithWord(offer.rooms, ['комната', 'комнаты', 'комнат']);
+  const guestsText = getNumWithWord(offer.guests, ['гостя', 'гостей']);
   const contentToSelector = {
     '.popup__title': offer.title,
     '.popup__text--address': offer.address,
