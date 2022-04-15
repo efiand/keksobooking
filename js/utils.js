@@ -38,7 +38,6 @@ export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : nu
 // Выбор словоформы по значению числа
 export const getWordAfterNum = (num, wordForms) => {
   const [nominative, genitiveSin = nominative, genitivePl = genitiveSin] = wordForms;
-
   const unitsValue = num % 10;
 
   if (num % 100 - unitsValue === 10 || unitsValue >= PLURAL_THRESHOLD) {
