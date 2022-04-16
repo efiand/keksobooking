@@ -81,6 +81,10 @@ const changeType = (type = typeFieldElement.value) => {
       max: MAX_PRICE,
     },
   });
+
+  if (!priceFieldElement.value) {
+    priceUISlider.set(0);
+  }
 };
 
 const togglePostForm = (isActive) => toggleForm(isActive, postFormElement, AD_DISABLED_CLASS_NAME);
