@@ -18,7 +18,7 @@ const togglePage = (status) => {
 const renderOffers = (filterOffers = Boolean) => {
   togglePage(false);
 
-  getOffers((data) => {
+  getOffers().then((data) => {
     hasOffers = data.length > 0;
     const offers = hasOffers ? data.filter(filterOffers).slice(0, OFFERS_COUNT) : data;
 
