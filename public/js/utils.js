@@ -1,20 +1,37 @@
 const PLURAL_THRESHOLD = 5;
 
 // Получение случайного целого из диапазона
-export const getRandomPositiveInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
-  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
-  const result = Math.random() * (upper - lower + 1) + lower;
+export const getRandomPositiveInteger = (min, max) => {
+  if (min < 0 || max < 0) {
+    return getRandomPositiveInteger(Math.abs(min), Math.abs(max));
+  }
 
-  return Math.floor(result);
+  if (max < min) {
+    return getRandomPositiveInteger(max, min);
+  }
+
+  if (max === min) {
+    return min;
+  }
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 // Получение случайного числа с заданной точностью из диапапзона
-export const getRandomPositiveFloat = (a, b, digits = 1) => {
-  const lower = Math.min(Math.abs(a), Math.abs(b));
-  const upper = Math.max(Math.abs(a), Math.abs(b));
-  const result = Math.random() * (upper - lower) + lower;
+export const getRandomPositiveFloat = (min, max, digits = 1) => {
+  if (min < 0 || max < 0) {
+    return getRandomPositiveFloat(Math.abs(min), Math.abs(max), digits);
+  }
 
+  if (max < min) {
+    return getRandomPositiveFloat(max, min, digits);
+  }
+
+  if (max === min) {
+    return parseFloat(min.toFixed(digits));
+  }
+
+  const result = Math.random() * (max - min) + min;
   return parseFloat(result.toFixed(digits));
 };
 
