@@ -8,14 +8,14 @@
   "devDependencies": {
     "browser-sync": "2.27.7",
     "eslint": "8.7.0",
-    "eslint-config-htmlacademy": "5.0.0"
+    "eslint-config-htmlacademy": "5.0.0",
+    "pre-commit": "1.2.2"
   },
   "scripts": {
-    "start": "browser-sync start --server \"public\" --no-ui --files \"public/js/**/*.js\"",
-    "lint": "eslint public/js/",
-    "test": "npm run lint",
-    "dev": "npm test && npm start"
+    "start": "npm run lint && browser-sync start --config \"bs-config.cjs\"",
+    "lint": "eslint public/js/"
   },
+  "pre-commit": "lint",
   "engines": {
     "node": "16.x",
     "npm": "8.x"

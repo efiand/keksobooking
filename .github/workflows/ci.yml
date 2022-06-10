@@ -25,7 +25,7 @@ jobs:
 
     - name: Run checks
       run: |
-        npm test
+        npm run lint
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
