@@ -1,13 +1,13 @@
 const { ESLint } = require("eslint");
 
-const JS_FILES = 'public/js/**/*.js';
+const JS_FILES = 'js/**/*.js';
 
 module.exports = {
-  server: 'public',
+  server: '.',
   ui: false,
   files: [
     {
-      match: 'public/**/*.{html,css}',
+      match: ['*.html', 'css/**/*.css'],
     },
     {
       match: JS_FILES,
@@ -19,9 +19,8 @@ module.exports = {
 
           if (results.filter(({ messages }) => messages.length).length) {
             console.log(formatter.format(results));
-          } else {
-            this.reload();
           }
+          this.reload();
         } catch (err) {
           process.exitCode = 1;
           console.error(err);

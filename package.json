@@ -12,7 +12,7 @@
     "pre-commit": "1.2.2"
   },
   "scripts": {
-    "start": "npm run lint && browser-sync start --config \"bs-config.cjs\"",
+    "start": "browser-sync start --config \"bs-config.cjs\"",
     "lint": "eslint public/js/"
   },
   "pre-commit": "lint",
