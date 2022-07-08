@@ -1,13 +1,13 @@
 const { ESLint } = require("eslint");
 
-const JS_FILES = 'js/**/*.js';
+const JS_FILES = 'public/js/**/*.js';
 
 module.exports = {
-  server: '.',
+  server: 'public',
   ui: false,
   files: [
     {
-      match: ['*.html', 'css/**/*.css'],
+      match: ['public/*.html', 'public/css/**/*.css'],
     },
     {
       match: JS_FILES,
