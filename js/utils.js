@@ -53,23 +53,40 @@ export const getRandomArrayPart = (arr) => {
 export const getNumberWithLeadZero = (number) => number < 10 ? `0${number}` : number;
 
 // Выбор словоформы по значению числа
-export const getWordAfterNum = (num, wordForms) => {
-  const [nominative, genitiveSin = nominative, genitivePl = genitiveSin] = wordForms;
-  const unitsValue = num % 10;
+export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
+  const lastDigit = num % 10;
 
-  if (num % 100 - unitsValue === 10 || unitsValue >= PLURAL_THRESHOLD) {
-    return genitivePl;
+  if (num % 100 - lastDigit === 10 || lastDigit >= PLURAL_THRESHOLD) {
+    return form3;
   }
 
-  if (unitsValue === 1) {
-    return nominative;
+  if (lastDigit === 1) {
+    return form1;
   }
 
-  return genitiveSin;
+  return form2;
 };
 
-// Вывод числа с подходящей словоформой
-export const getNumWithWord = (num, wordForms) => `${num} ${getWordAfterNum(num, wordForms)}`;
+// Создаёт функцию, генерирующую DOM-узел, заполненный контентом
+export const getElementFiller = (template) => (selector, data = '', createChildElement) => {
+  const element = template.querySelector(selector);
+  const content = data.toString();
+
+  if (Array.isArray(data) && data.length) {
+    if (typeof createChildElement === 'function') {
+      element.innerHTML = '';
+      data.forEach((item) => {
+        element.append(createChildElement(item));
+      });
+    } else {
+      element.textContent = data.join(', ');
+    }
+  } else if (content) {
+    element.textContent = content;
+  } else {
+    element.remove();
+  }
+};
 
 export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
 
