@@ -6,7 +6,7 @@ const createUISlider = (sliderElement, min, updateHandler) => {
   noUiSlider.create(sliderElement, {
     range: {
       min,
-      max: MAX_PRICE,
+      max: MAX_PRICE
     },
     start: min,
     step: STEP,
@@ -17,7 +17,7 @@ const createUISlider = (sliderElement, min, updateHandler) => {
       },
       from(value) {
         return parseFloat(value);
-      },
+      }
     }
   });
 

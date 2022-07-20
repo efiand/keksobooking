@@ -15,7 +15,7 @@ const RoomToGuests = {
   1: ['1'],
   2: ['1', '2'],
   3: ['1', '2', '3'],
-  100: ['0'],
+  100: ['0']
 };
 
 const postFormElement = document.querySelector('.ad-form');
@@ -79,8 +79,8 @@ const changeType = (type = typeFieldElement.value) => {
   priceUISlider.updateOptions({
     range: {
       min: parseInt(priceFieldElement.min, 10),
-      max: MAX_PRICE,
-    },
+      max: MAX_PRICE
+    }
   });
 
   if (!priceFieldElement.value) {
