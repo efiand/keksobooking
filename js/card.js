@@ -9,7 +9,6 @@ const createCard = ({ author = {}, offer = {} }) => {
 
   const fillElement = getElementFiller(cardElement);
 
-
   // Заголовок объявления
   fillElement('.popup__title', offer.title);
 
