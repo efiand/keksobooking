@@ -52,6 +52,11 @@ const getCapacityMessage = () => {
 };
 const getPriceMessage = () => `Выберите число между ${priceFieldElement.min} и ${MAX_PRICE}`;
 
+const pristine = new Pristine(postFormElement, {
+  classTo: GROUP_CLASS_NAME,
+  errorTextParent: GROUP_CLASS_NAME
+});
+
 const setPriceAttributes = (type) => {
   const minPrice = offerType[type].min;
   priceFieldElement.min = minPrice;
@@ -60,11 +65,6 @@ const setPriceAttributes = (type) => {
 setPriceAttributes(initialType);
 
 const resetMapHandler = addMapHandlers(addressElement);
-
-const pristine = new Pristine(postFormElement, {
-  classTo: GROUP_CLASS_NAME,
-  errorTextParent: GROUP_CLASS_NAME
-});
 
 const priceUISlider = createUISlider(priceSliderElement, parseInt(priceFieldElement.min, 10), () => {
   priceFieldElement.value = priceUISlider.get();
