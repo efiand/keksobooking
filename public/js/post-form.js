@@ -76,15 +76,17 @@ const priceUISlider = createUISlider(priceSliderElement, parseInt(priceFieldElem
 const changeType = (type = typeFieldElement.value) => {
   setPriceAttributes(type);
 
+  const min = parseInt(priceFieldElement.min, 10);
+
   priceUISlider.updateOptions({
     range: {
-      min: parseInt(priceFieldElement.min, 10),
+      min,
       max: MAX_PRICE
     }
   });
 
   if (!priceFieldElement.value) {
-    priceUISlider.set(0);
+    priceUISlider.set(min);
   }
 };
 
