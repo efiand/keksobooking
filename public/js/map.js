@@ -1,7 +1,7 @@
 import { getLocationString } from './utils.js';
 
-const ZOOM = 12;
-const PIN_SIZE = 52;
+const ZOOM = 13;
+const PIN_SIZE = 40;
 const MAIN_PIN_SIZE = 52;
 const PIN_RATIO = 0.5;
 const LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
