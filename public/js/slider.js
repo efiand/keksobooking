@@ -2,7 +2,7 @@ import { MAX_PRICE } from './const.js';
 
 const STEP = 1000;
 
-const createUISlider = (sliderElement, min, updateHandler) => {
+const createUISlider = (sliderElement, min, slideHandler) => {
   noUiSlider.create(sliderElement, {
     range: {
       min,
@@ -21,7 +21,7 @@ const createUISlider = (sliderElement, min, updateHandler) => {
     }
   });
 
-  sliderElement.noUiSlider.on('slide', updateHandler);
+  sliderElement.noUiSlider.on('slide', slideHandler);
 
   return sliderElement.noUiSlider;
 };
