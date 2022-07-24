@@ -1,5 +1,5 @@
 import { MAX_PRICE, offerType } from './const.js';
-import { getWordAfterNum, toggleForm } from './utils.js';
+import { outputNumWithWord, toggleForm } from './utils.js';
 import { postData } from './api.js';
 import { clearFilters } from './filters.js';
 import { addMapHandlers } from './map.js';
@@ -46,7 +46,7 @@ const validateCapacity = () => RoomToGuests[roomsFieldElement.value].includes(ca
 
 const getCapacityMessage = () => {
   const { value } = roomsFieldElement;
-  const rooms = `${value} ${getWordAfterNum(value, ['комнаты', 'комнат'])}`;
+  const rooms = outputNumWithWord(value, ['комнаты', 'комнат']);
   const validGuests = RoomToGuests[value];
   return `Для ${rooms} допустимо гостей: ${validGuests.join(', ')}`;
 };
