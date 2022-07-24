@@ -68,6 +68,9 @@ export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
   return form2;
 };
 
+// Вывод числа со словоформой
+export const outputNumWithWord = (num, forms) => `${num} ${getWordAfterNum(num, forms)}`;
+
 // Создаёт функцию, генерирующую DOM-узел, заполненный контентом
 export const getElementFiller = (template) => {
   const cb = (selector, data = '', createChildElement) => {

@@ -1,5 +1,5 @@
 import { offerType } from './const.js';
-import { getElementFiller, getWordAfterNum } from './utils.js';
+import { getElementFiller, outputNumWithWord } from './utils.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const photoTemplate = cardTemplate.querySelector('.popup__photo');
@@ -22,8 +22,8 @@ const createCard = ({ author = {}, offer = {} }) => {
   fillElement('.popup__type', offerType[offer.type].title);
 
   // Количество гостей и комнат
-  const rooms = `${offer.rooms} ${getWordAfterNum(offer.rooms, ['комната', 'комнаты', 'комнат'])}`;
-  const guests = `${offer.guests} ${getWordAfterNum(offer.guests, ['гостя', 'гостей'])}`;
+  const rooms = outputNumWithWord(offer.rooms, ['комната', 'комнаты', 'комнат']);
+  const guests = outputNumWithWord(offer.guests, ['гостя', 'гостей']);
   fillElement('.popup__text--capacity', `${rooms} для ${guests}`);
 
   // Время заезда и выезда
