@@ -1,5 +1,6 @@
 const PLURAL_THRESHOLD = 5;
 const COORD_DECIMALS = 5;
+const ESC_KEY = 'Escape';
 
 // Получение случайного целого из диапазона
 export const getRandomPositiveInteger = (min, max) => {
@@ -73,7 +74,7 @@ export const outputNumWithWord = (num, forms) => `${num} ${getWordAfterNum(num, 
 
 // Создаёт функцию, генерирующую DOM-узел, заполненный контентом
 export const getElementFiller = (template) => {
-  const cb = (selector, data = '', createChildElement) => {
+  const fillElement = (selector, data = '', createChildElement) => {
     const element = template.querySelector(selector);
     const content = data.toString();
 
@@ -93,12 +94,12 @@ export const getElementFiller = (template) => {
     }
   };
 
-  return cb;
+  return fillElement;
 };
 
 export const getLocationString = ({ lat, lng }) => `${lat.toFixed(COORD_DECIMALS)}, ${lng.toFixed(COORD_DECIMALS)}`;
 
-export const isEscapeKeyPressed = (evt) => evt.key === 'Escape';
+export const isEscapeKeyPressed = (evt) => evt.key === ESC_KEY;
 
 export const toggleForm = (activeFlag, formElement, disabledClassName) => {
   const classMethod = activeFlag ? 'remove' : 'add';
