@@ -1,19 +1,25 @@
-import { createPopup } from './popup.js';
+import { createPopup, PopupMode } from './popup.js';
 
-const SERVER = 'https://26.javascript.pages.academy/keksobooking';
+const HttpMethod = {
+  GET: 'GET',
+  POST: 'POST'
+};
+
+const GET_URL = 'https://26.javascript.pages.academy/keksobooking/data';
+const POST_URL = 'https://26.javascript.pages.academy/keksobooking';
 
 const handleFetchError = () => {
-  createPopup('ERROR_FETCH');
+  createPopup(PopupMode.ERROR_FETCH);
   return [];
 };
 
 const handlePostError = () => {
-  createPopup('ERROR_POST');
+  createPopup(PopupMode.ERROR_POST);
 };
 
 const getData = () =>
-  fetch(`${SERVER}/data`, {
-    method: 'GET',
+  fetch(GET_URL, {
+    method: HttpMethod.GET,
     credentials: 'same-origin'
   })
     .then((res) => {
@@ -28,14 +34,14 @@ const getData = () =>
     .catch(handleFetchError);
 
 const postData = (body, handleSuccess) =>
-  fetch(SERVER, {
-    method: 'POST',
+  fetch(POST_URL, {
+    method: HttpMethod.POST,
     body
   })
     .then(({ ok }) => {
       if (ok) {
         handleSuccess();
-        createPopup('SUCCESS_POST');
+        createPopup(PopupMode.SUCCESS_POST);
       } else {
         handlePostError();
       }
