@@ -20,21 +20,20 @@ export const getRandomPositiveInteger = (min, max) => {
 };
 
 // Получение случайного числа с заданной точностью из диапапзона
-export const getRandomPositiveFloat = (min, max, digits = 1) => {
+export const getRandomPositiveFloat = (min, max) => {
   if (min < 0 || max < 0) {
-    return getRandomPositiveFloat(Math.abs(min), Math.abs(max), digits);
+    return getRandomPositiveFloat(Math.abs(min), Math.abs(max));
   }
 
   if (max < min) {
-    return getRandomPositiveFloat(max, min, digits);
+    return getRandomPositiveFloat(max, min);
   }
 
   if (max === min) {
-    return parseFloat(min.toFixed(digits));
+    return min;
   }
 
-  const result = Math.random() * (max - min) + min;
-  return parseFloat(result.toFixed(digits));
+  return Math.random() * (max - min) + min;
 };
 
 // Получение случайного элемента массива
