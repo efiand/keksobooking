@@ -1,11 +1,9 @@
 # Учебный проект «Кексобукинг»
 
-* [Опубликованная версия](https://efiand.github.io/keksobooking-25).
+* [Опубликованная версия](https://efiand.github.io/keksobooking).
 
-* Наставник: [Андрей Ефимов](https://up.htmlacademy.ru/javascript/25/user/367335).
+* Наставник: [Андрей Ефимов](https://htmlacademy.ru/profile/id367335).
 
 ---
-
-<a href="https://htmlacademy.ru/intensive/javascript"><img align="left" width="50" height="50" alt="HTML Academy" src="https://up.htmlacademy.ru/static/img/intensive/javascript/logo-for-github-2.png"></a>
 
 Репозиторий создан для обучения на интенсивном онлайн‑курсе «[JavaScript. Профессиональная разработка веб-интерфейсов](https://htmlacademy.ru/intensive/javascript)» от [HTML Academy](https://htmlacademy.ru).
