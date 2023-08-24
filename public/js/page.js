@@ -15,12 +15,12 @@ const togglePage = (status) => {
   toggleFilters(!status ? false : hasOffers);
 };
 
-const renderOffers = (filterOffers = Boolean) => {
+const renderOffers = (filterOffer = Boolean) => {
   togglePage(false);
 
   getOffers().then((data) => {
     hasOffers = data.length > 0;
-    const offers = hasOffers ? data.filter(filterOffers).slice(0, OFFERS_COUNT) : data;
+    const offers = hasOffers ? data.filter(filterOffer).slice(0, OFFERS_COUNT) : data;
 
     renderMap(offers, createCard, () => {
       togglePage(true);
