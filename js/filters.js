@@ -37,14 +37,14 @@ const filterRules = {
   }
 };
 
-const filterOffers = ({ offer }) =>
+const filterOffer = ({ offer }) =>
   filterControlGroups.every(({ value, id }) => value === DEFAULT_VALUE || filterRules[id](offer, value));
 
 const toggleFilters = (isActive) => {
   toggleForm(isActive, filtersElement, FILTERS_DISABLED_CLASS_NAME);
 };
 
-const rerender = () => renderOffers(filterOffers);
+const rerender = () => renderOffers(filterOffer);
 
 const clearFilters = () => {
   filterControlGroups.forEach((group) => {
@@ -61,4 +61,4 @@ const clearFilters = () => {
 
 filtersElement.addEventListener('change', debounce(rerender, RERENDER_DELAY));
 
-export { toggleFilters, clearFilters, filterOffers };
+export { toggleFilters, clearFilters };
