@@ -1,4 +1,5 @@
-const PLURAL_THRESHOLD = 5;
+/* eslint-disable no-magic-numbers */
+
 const COORD_DECIMALS = 5;
 const ESC_KEY = 'Escape';
 
@@ -55,17 +56,19 @@ export const getNumberWithLeadZero = (number) => (number < 10 ? `0${number}` : n
 
 // Выбор словоформы по значению числа
 export const getWordAfterNum = (num, [form1, form2 = form1, form3 = form2]) => {
-  const lastDigit = num % 10;
+  const remainder10 = num % 10;
+  const remainder100 = num % 100;
 
-  if ((num % 100) - lastDigit === 10 || lastDigit >= PLURAL_THRESHOLD) {
-    return form3;
-  }
-
-  if (lastDigit === 1) {
+  if (remainder10 === 1 && remainder100 !== 11) {
     return form1;
   }
 
-  return form2;
+  const notInSecondDozen = remainder100 < 10 || remainder100 >= 20;
+  if (remainder10 >= 2 && remainder10 <= 4 && notInSecondDozen) {
+    return form2;
+  }
+
+  return form3;
 };
 
 // Вывод числа со словоформой
