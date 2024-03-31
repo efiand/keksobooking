@@ -5,8 +5,8 @@ const HttpMethod = {
   POST: 'POST'
 };
 
-const GET_URL = 'https://26.javascript.pages.academy/keksobooking/data';
-const POST_URL = 'https://26.javascript.pages.academy/keksobooking';
+const GET_URL = 'https://26.javascript.htmlacademy.pro/keksobooking/data';
+const POST_URL = 'https://26.javascript.htmlacademy.pro/keksobooking';
 
 const handleFetchError = () => {
   createPopup(PopupMode.ERROR_FETCH);
