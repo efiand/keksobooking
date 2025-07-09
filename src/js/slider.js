@@ -1,4 +1,6 @@
-import { MAX_PRICE } from './const.js';
+import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
+import { MAX_PRICE } from './const';
 
 const STEP = 1000;
 
@@ -18,7 +20,7 @@ const createUISlider = (sliderElement, min, slideHandler) => {
       from(value) {
         return parseFloat(value);
       }
-    }
+    },
   });
 
   sliderElement.noUiSlider.on('slide', slideHandler);

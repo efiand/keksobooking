@@ -1,29 +1,12 @@
 root: true
 
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 2022
   sourceType: "module"
 
 env:
-  es2017: true
+  es2022: true
   browser: true
-
-globals:
-  _: readonly
-  L: readonly
-  noUiSlider: readonly
-  Pristine: readonly
 
 extends:
   "htmlacademy/vanilla"
-
-rules:
-  no-magic-numbers:
-    - error
-    -
-      ignore:
-        - -1
-        - 0
-        - 1
-        - 10
-        - 100

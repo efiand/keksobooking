@@ -1,11 +1,12 @@
-import { MAX_PRICE, offerType } from './const.js';
-import { outputNumWithWord, toggleForm } from './utils.js';
-import { postData } from './api.js';
-import { clearFilters } from './filters.js';
-import { addMapHandlers } from './map.js';
-import { createUISlider } from './slider.js';
-import { initImageControl } from './image-control.js';
-import { togglePage } from './page.js';
+import Pristine from 'pristinejs';
+import { MAX_PRICE, offerType } from './const';
+import { outputNumWithWord, toggleForm } from './utils';
+import { postData } from './api';
+import { clearFilters } from './filters';
+import { addMapHandlers } from './map';
+import { createUISlider } from './slider';
+import { initImageControl } from './image-control';
+import { togglePage } from './page';
 
 const GROUP_CLASS_NAME = 'ad-form__element';
 const AD_DISABLED_CLASS_NAME = 'ad-form--disabled';

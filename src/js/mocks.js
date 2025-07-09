@@ -1,4 +1,4 @@
-import { OFFERS_COUNT, offerType } from './const.js';
+import { OFFERS_COUNT, offerType } from './const';
 import {
   getRandomPositiveInteger,
   getRandomPositiveFloat,
@@ -6,7 +6,7 @@ import {
   getRandomArrayPart,
   getNumberWithLeadZero,
   getLocationString
-} from './utils.js';
+} from './utils';
 
 const CHECK_TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];

@@ -1,4 +1,4 @@
-import { createPopup, PopupMode } from './popup.js';
+import { createPopup, PopupMode } from './popup';
 
 const HttpMethod = {
   GET: 'GET',

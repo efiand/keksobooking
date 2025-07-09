@@ -1,5 +1,5 @@
-import { isEscapeKeyPressed } from './utils.js';
-import { togglePage } from './page.js';
+import { isEscapeKeyPressed } from './utils';
+import { togglePage } from './page';
 
 export const PopupMode = {
   SUCCESS_POST: 'SUCCESS_POST',

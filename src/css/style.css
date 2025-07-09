@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../fonts/Roboto-Bold.woff2') format('woff2');
+  src: url('/fonts/Roboto-Bold.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../fonts/Roboto-Regular.woff2') format('woff2');
+  src: url('/fonts/Roboto-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../fonts/Roboto-Medium.woff2') format('woff2');
+  src: url('/fonts/Roboto-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -157,7 +157,7 @@ fieldset {
   cursor: pointer;
 
   background-color: #f8f8f8;
-  background-image: url('../img/sprite-feature.svg');
+  background-image: url('/img/sprite-feature.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 25px 345px;
@@ -447,7 +447,7 @@ fieldset {
   border-radius: 3px;
 
   background-color: #fafafa;
-  background-image: url('../img/sprite-feature.svg');
+  background-image: url('/img/sprite-feature.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 35px 600px;
@@ -727,7 +727,7 @@ fieldset {
 
   font-size: 0;
 
-  background-image: url('../img/sprite-social.svg');
+  background-image: url('/img/sprite-social.svg');
   background-repeat: no-repeat;
   background-size: 29px 274px;
 
@@ -888,7 +888,7 @@ fieldset {
 
   font-size: 0;
 
-  background-image: url('../img/sprite-feature.svg');
+  background-image: url('/img/sprite-feature.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 25px 345px;
@@ -984,7 +984,7 @@ fieldset {
   width: 109px;
   height: 122px;
 
-  background-image: url('../img/muffin-white.svg');
+  background-image: url('/img/muffin-white.svg');
   background-position: center;
   background-repeat: no-repeat;
 
@@ -994,7 +994,7 @@ fieldset {
 }
 
 .error__message::before {
-  background-image: url('../img/muffin-red.svg');
+  background-image: url('/img/muffin-red.svg');
 }
 
 .error__button {

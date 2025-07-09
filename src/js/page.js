@@ -1,10 +1,10 @@
-import { OFFERS_COUNT } from './const.js';
-import { createCard } from './card.js';
-import { renderMap } from './map.js';
-import { getData } from './api.js';
-import { createMocks } from './mocks.js';
-import { toggleFilters } from './filters.js';
-import { togglePostForm } from './post-form.js';
+import { OFFERS_COUNT } from './const';
+import { createCard } from './card';
+import { renderMap } from './map';
+import { getData } from './api';
+import { createMocks } from './mocks';
+import { toggleFilters } from './filters';
+import { togglePostForm } from './post-form';
 
 let hasOffers = false;
 

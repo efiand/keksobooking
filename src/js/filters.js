@@ -1,5 +1,5 @@
-import { debounce, toggleForm } from './utils.js';
-import { renderOffers } from './page.js';
+import { debounce, toggleForm } from './utils';
+import { renderOffers } from './page';
 
 const RERENDER_DELAY = 500;
 const DEFAULT_VALUE = 'any';

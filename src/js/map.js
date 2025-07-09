@@ -1,4 +1,6 @@
-import { getLocationString } from './utils.js';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { getLocationString } from './utils';
 
 const ZOOM = 13;
 const PIN_SIZE = 40;

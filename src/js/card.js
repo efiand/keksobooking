@@ -1,5 +1,5 @@
-import { offerType } from './const.js';
-import { getElementFiller, outputNumWithWord } from './utils.js';
+import { offerType } from './const';
+import { getElementFiller, outputNumWithWord } from './utils';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 const photoTemplate = cardTemplate.querySelector('.popup__photo');
